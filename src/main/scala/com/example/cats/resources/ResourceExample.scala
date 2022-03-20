@@ -1,6 +1,7 @@
 package com.example.cats.resources
 
-import cats.effect.kernel.Resource
+//import cats.effect.kernel.Resource
+import cats.effect.Resource
 import cats.effect.{ExitCode, IO, IOApp}
 
 import scala.io.{BufferedSource, Source}
