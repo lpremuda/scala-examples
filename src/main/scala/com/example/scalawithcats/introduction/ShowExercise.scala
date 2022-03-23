@@ -31,4 +31,25 @@ object ShowExercise extends App {
 
   println(Cat("Kiki", 10, "tabby").show)
 
+  /*
+  Explanation for "234".show
+
+  1. "234".show method is called from Show.Ops[A]:
+  trait Ops[A] {
+    def typeClassInstance: Show[A]
+    def self: A
+    def show: String = typeClassInstance.show(self)
+  }
+
+  Creates new Ops[A]:
+  trait ToShowOps {
+    implicit def toShow[A](target: A)(implicit tc: Show[A]): Ops[A] =
+      new Ops[A] {
+        val self = target
+        val typeClassInstance = tc
+      }
+  }
+
+ */
+
 }
