@@ -2,8 +2,6 @@ package com.example.scalawithcats.introduction
 
 object PrintableExercise extends App {
 
-  final case class Cat(name: String, age: Int, color: String)
-
   trait Printable[A] {
     def format(value: A): String
   }
