@@ -1,4 +1,4 @@
-package com.example.scalawithcats.introduction
+package com.example.scalawithcats.ch1Introduction
 
 trait IntroductionSummary {
 
@@ -14,6 +14,9 @@ trait IntroductionSummary {
     cats              type class definition
     cats.instances    default instances provided via objects
     cats.syntax       type class syntax
+
+    cats prefers to use invariant type classes
+
 
    */
 

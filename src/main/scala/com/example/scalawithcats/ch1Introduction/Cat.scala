@@ -1,4 +1,4 @@
-package com.example.scalawithcats.introduction
+package com.example.scalawithcats.ch1Introduction
 
 final case class Cat(
                       name: String,

@@ -1,4 +1,4 @@
-package com.example.scalawithcats.introduction
+package com.example.scalawithcats.ch1Introduction
 
 import cats.Eq
 import cats.syntax.eq._
