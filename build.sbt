@@ -2,8 +2,12 @@ name := "scala-examples"
 
 version := "0.1"
 
-// Note: Scala with Cats uses 2.13.1
-scalaVersion := "2.13.8"
+/*
+  Note:
+    Originally was using 2.13.8
+    Moved to 2.13.1 (what Scala with Cats uses) because of a deprecation error I was getting when working with Eval type class
+ */
+scalaVersion := "2.13.1"
 
 // Note: Scala with Cats uses 2.1.0
 libraryDependencies ++= Seq("org.typelevel" %% "cats-core" % "2.3.0")
