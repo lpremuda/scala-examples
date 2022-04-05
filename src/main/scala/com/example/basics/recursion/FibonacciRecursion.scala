@@ -24,6 +24,7 @@ object FibonacciRecursion extends App {
 
   @tailrec
   def fibonacci(n: Int, a: Int = 0, b: Int = 1): Int = {
+
     if (n == 1) b
     else fibonacci(n-1, b, a+b)
   }
