@@ -7,6 +7,17 @@ import monix.reactive.{Consumer, Observable}
 object ObservablePractice extends TaskApp {
 
   /*
+    Monix terminology:
+      Observable: similar to an Iterable, but can process events asynchronously without blocking
+      Observer: subscribes to an observable
+      Consumer: a function that converts an Observable into a Task
+
+    2 ways to convert Observable into a Task:
+      1. Custom consumer
+      2. Built-in consumer (foreachL, firstL, etc...)
+   */
+
+  /*
     ReactiveX Observable explanation: https://reactivex.io/documentation/observable.html
 
     Observable will pass through the generated items to the Observer by calling onNext.
@@ -33,17 +44,18 @@ object ObservablePractice extends TaskApp {
    */
 
   val dataSource: Range.Inclusive = 1 to 3
-  val obs: Observable[Int] = Observable
+  val obsMapped: Observable[Int] = Observable
     .fromIterable(dataSource) // creates an Observable. Hence, it implements subscribe. The subscribe method passes each element to its subscribers by calling its onNext method
     .map(i => {
-      println("i + 2")
-      i + 2
+      println(s"map($i => { i * 2 })")
+      i * 2
     })
     .map(i => {
-      println("i * 3")
+      println(s"map($i => { i + 3 })")
       i + 3
     })
-    .sum
+
+  val obs: Observable[Int] = obsMapped.sum
 
   val element: Task[Int] = obs.firstL
 
@@ -52,6 +64,7 @@ object ObservablePractice extends TaskApp {
     .take(10)
     .map(_ * 2)
 
+  // Consumer.foldLeft can be thought of an a built-in consumer
   val consumer: Consumer[Long, Long] =
     Consumer.foldLeft(0L)(_ + _)
 
@@ -59,15 +72,21 @@ object ObservablePractice extends TaskApp {
   val task: Task[Long] =
     list.consumeWith(consumer)
 
-  val observableOfStrings: Observable[String] = Observable.fromIterable((List("Hello","world!", "From", "Lucas")))
+  val observableOfStrings: Observable[String] = Observable.fromIterable(List("Hello","world!", "From", "Lucas"))
+  // foreachL can be thought of as a built in consumer
   val printStrings: Task[Unit] = observableOfStrings.foreachL(println)
 
   def run(args: List[String]): Task[ExitCode] = {
     for {
+      _ <- Task { println("\nExecuting task...") }
       num <- element
-      _ <- Task { println(num) }
+      _ <- Task { println(s"First element of observable: $num") }
+
+      _ <- Task { println(s"\nRunning next task...") }
       long <- task
-      _ <- Task { println(long) }
+      _ <- Task { println(s"Result of task: $long") }
+
+      _ <- Task { println(s"\nExecuting observableOfStrings.foreachL task...")}
       _ <- printStrings
     } yield ExitCode.Success
   }

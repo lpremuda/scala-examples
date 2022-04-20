@@ -7,7 +7,7 @@ import monix.reactive.{Consumer, Observable}
 
 object ObservableWithConsumer extends TaskApp {
 
-  private val maxNumOfSubscribers: Int = 10
+  private val maxNumOfSubscribers: Int = 3
   println(s"Max number of subscribers: $maxNumOfSubscribers")
 
   val testData1: List[Array[Int]] = List(
@@ -28,7 +28,8 @@ object ObservableWithConsumer extends TaskApp {
     Array(10,11,12,13,55),
     Array(15,16,17,18,19),
     Array(20,21,22,23,24),
-    Array(25,26,27,28,29)
+    Array(25,26,27,28,29),
+    Array(23,28,4,10)
   )
 
   // 1. Create an Observable of Array[Int]
@@ -40,7 +41,7 @@ object ObservableWithConsumer extends TaskApp {
     // list that we will flatten later
     Consumer.foldLeft[Chain[Int], Array[Int]](Chain.empty)(
       (existingInts: Chain[Int], newInts: Array[Int]) => {
-        println(s"existsInts: $existingInts")
+        println(s"existingInts: $existingInts")
         // Pick the value from the Array[Int].
         Option(newInts.max)
           // Discard ints with a value <= 5
@@ -69,7 +70,6 @@ object ObservableWithConsumer extends TaskApp {
       def loadBalance[A, R](parallelism: Int, consumer: Consumer[A, R]): Consumer[A, List[R]]
 
       Creates a consumer that, when consuming the stream, will start multiple subscribers and distribute load between them.
-      Once
      */
     val loadBalancedConsumer: Consumer[Array[Int], List[Chain[Int]]] = Consumer
       .loadBalance[Array[Int], Chain[Int]](parallelism = maxNumOfSubscribers, mySyncConsumer)
