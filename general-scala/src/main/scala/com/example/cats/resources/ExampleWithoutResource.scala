@@ -5,7 +5,7 @@ import scala.io.Source
 object ExampleWithoutResource extends App {
 
     println("Creating source (BufferedSource)")
-    val source = Source.fromResource("test.txt")
+    val source = Source.fromResource("src/main/resources/test.txt")
     println("mkString")
     val lines = source.mkString
     println("Closing source")

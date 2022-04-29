@@ -15,7 +15,7 @@ object ResourceExample extends IOApp {
     //    F[_] = IO
     //    A    = BufferedSource
     val fileResource: Resource[IO, BufferedSource] = Resource.make(
-      IO(Source.fromResource("test.txt"))
+      IO(Source.fromResource("src/main/resources/test.txt"))
     )(
       bufferedSource => IO(bufferedSource.close())
     )
