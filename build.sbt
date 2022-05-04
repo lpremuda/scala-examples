@@ -29,3 +29,6 @@ lazy val `general-scala` = project
 
 lazy val `cats-effect` = project
   .in(new File("cats-effect"))
+  .settings(
+    libraryDependencies += "org.typelevel" %% "cats-effect" % "3.2.0"
+  )
