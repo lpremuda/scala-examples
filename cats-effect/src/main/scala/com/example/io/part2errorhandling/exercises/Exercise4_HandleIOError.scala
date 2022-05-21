@@ -1,4 +1,4 @@
-package com.example.io.p2errorhandling.exercises
+package com.example.io.part2errorhandling.exercises
 
 import cats.effect.IO
 
