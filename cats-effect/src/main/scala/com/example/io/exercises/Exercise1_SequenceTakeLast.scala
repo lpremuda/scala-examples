@@ -3,7 +3,7 @@ package com.example.io.exercises
 import cats.effect.IO
 import cats.effect.unsafe.implicits.global
 
-object SequenceTakeLast extends App {
+object Exercise1_SequenceTakeLast extends App {
 
   def sequenceTakeLast[A, B](ioa: IO[A], iob: IO[B]): IO[B] = {
     for {
@@ -16,6 +16,14 @@ object SequenceTakeLast extends App {
     ioa.flatMap(_ => iob.map(identity))
   }
 
+  def sequenceTakeLastFlatMap_v2[A, B](ioa: IO[A], iob: IO[B]): IO[B] = {
+    ioa *> iob // andThen
+  }
+
+  def sequenceTakeLastFlatMap_v3[A, B](ioa: IO[A], iob: IO[B]): IO[B] = {
+    ioa >> iob // andThen with by-name call
+  }
+
   val ioa: IO[Int] = IO.pure(42)
   val iob: IO[String] = IO {
     println("From iob")
@@ -25,8 +33,8 @@ object SequenceTakeLast extends App {
   val result = sequenceTakeLast(ioa, iob).unsafeRunSync()
   println(result)
 
-  val result2 = sequenceTakeLastFlatMap(ioa, iob).unsafeRunSync()
-  println(result2)
+  val resultFlatMap = sequenceTakeLastFlatMap(ioa, iob).unsafeRunSync()
+  println(resultFlatMap)
 
   val result3 = sequenceTakeLast(iob, ioa).unsafeRunSync()
   println(result3)

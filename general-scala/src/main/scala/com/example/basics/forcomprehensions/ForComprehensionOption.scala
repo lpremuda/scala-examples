@@ -1,6 +1,6 @@
 package com.example.basics.forcomprehensions
 
-object ForCompOptionExample extends App {
+object ForComprehensionOption extends App {
 
   val optionSum = for {
     a <- Option(1)
