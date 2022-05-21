@@ -1,6 +1,7 @@
 package com.example.io.p1introduction.exercises
 
 import cats.effect.IO
+import cats.effect.unsafe.implicits.global
 
 object Exercise7_Fibonacci extends App {
 
