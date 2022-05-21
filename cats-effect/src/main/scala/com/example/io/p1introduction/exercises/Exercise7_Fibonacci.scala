@@ -1,7 +1,6 @@
-package com.example.io.exercises
+package com.example.io.p1introduction.exercises
 
 import cats.effect.IO
-import cats.effect.unsafe.implicits.global
 
 object Exercise7_Fibonacci extends App {
 
@@ -10,9 +9,10 @@ object Exercise7_Fibonacci extends App {
 
   def fibonacci(n: Int): IO[BigInt] = {
     if (n <= 2) IO(1)
-    else for {
-        last <- IO.defer(fibonacci(n-1)) // same as IO.delay(...).flatten
-        prev <- IO.defer(fibonacci(n-2)) // same as IO.delay(...).flatten
+    else
+      for {
+        last <- IO.defer(fibonacci(n - 1)) // same as IO.delay(...).flatten
+        prev <- IO.defer(fibonacci(n - 2)) // same as IO.delay(...).flatten
       } yield last + prev
   }
 

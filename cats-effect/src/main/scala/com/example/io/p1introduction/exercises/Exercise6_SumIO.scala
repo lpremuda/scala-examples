@@ -1,7 +1,6 @@
-package com.example.io.exercises
+package com.example.io.p1introduction.exercises
 
 import cats.effect.IO
-import cats.effect.unsafe.implicits.global
 
 object Exercise6_SumIO extends App {
   /*
@@ -127,8 +126,10 @@ object Exercise6_SumIO extends App {
             IO(1)
               .flatMap { one =>
                 IO(0).map(previousSum => previousSum + one)
-              }.map(previousSum => previousSum + two)
-          }.map(previousSum => previousSum + three)
+              }
+              .map(previousSum => previousSum + two)
+          }
+          .map(previousSum => previousSum + three)
       } // .flatMap { three =>
 
   val manualIO3: IO[Int] =
@@ -139,18 +140,22 @@ object Exercise6_SumIO extends App {
             IO(1)
               .flatMap { one =>
                 IO(0).map(previousSum => previousSum + one)
-              }.map(previousSum => previousSum + two)
-          }.map(previousSum => previousSum + three)
+              }
+              .map(previousSum => previousSum + two)
+          }
+          .map(previousSum => previousSum + three)
       } // .flatMap { three =>
 
   val manualIO4: IO[Int] =
-        IO(2)
-          .flatMap { two =>
-            IO(1)
-              .flatMap { one =>
-                IO(0).map(previousSum => previousSum + one)
-              }.map(previousSum => previousSum + two)
-          }.map(previousSum => previousSum + 3)
+    IO(2)
+      .flatMap { two =>
+        IO(1)
+          .flatMap { one =>
+            IO(0).map(previousSum => previousSum + one)
+          }
+          .map(previousSum => previousSum + two)
+      }
+      .map(previousSum => previousSum + 3)
 
   val manualIO5: IO[Int] =
     IO(2)
@@ -158,8 +163,10 @@ object Exercise6_SumIO extends App {
         IO(1)
           .flatMap { one =>
             IO(0).map(previousSum => previousSum + one)
-          }.map(previousSum => previousSum + 2)
-      }.map(previousSum => previousSum + 3)
+          }
+          .map(previousSum => previousSum + 2)
+      }
+      .map(previousSum => previousSum + 3)
 
   println("manualIO")
   println(manualIO.unsafeRunSync())
@@ -211,7 +218,6 @@ object Exercise6_SumIO extends App {
     // IO(6).unsafeRunSync() = 6
 
   }
-
 
   println("sumIO_3")
   println(sumIO_3.unsafeRunSync())

@@ -1,7 +1,6 @@
-package com.example.io.exercises
+package com.example.io.p1introduction.exercises
 
 import cats.effect.IO
-import cats.effect.unsafe.implicits.global
 
 object Exercise3_Forever extends App {
 

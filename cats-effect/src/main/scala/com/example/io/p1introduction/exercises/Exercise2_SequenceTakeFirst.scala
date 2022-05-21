@@ -1,7 +1,6 @@
-package com.example.io.exercises
+package com.example.io.p1introduction.exercises
 
 import cats.effect.IO
-import cats.effect.unsafe.implicits.global
 
 object Exercise2_SequenceTakeFirst extends App {
 
@@ -21,6 +20,7 @@ object Exercise2_SequenceTakeFirst extends App {
   }
 
   val ioa: IO[Int] = IO.pure(42)
+
   val iob: IO[String] = IO {
     println("From iob")
     "hello"
