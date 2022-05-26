@@ -1,8 +1,8 @@
-package com.example.io.part3parallelism
+package com.example
+package io.part3parallelism
 
 import cats.Parallel
 import cats.effect.{IO, IOApp}
-import com.example.io.DebugWrapper
 
 object IOParallelism extends IOApp.Simple {
 

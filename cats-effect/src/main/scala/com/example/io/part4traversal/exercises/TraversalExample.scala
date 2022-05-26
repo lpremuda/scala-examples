@@ -1,9 +1,8 @@
-package com.example.io.part4traversal.exercises
+package com.example
+package io.part4traversal.exercises
 
 import cats.Traverse
 import cats.effect.{IO, IOApp}
-import com.example.io.DebugWrapper
-
 import scala.util.Random
 
 object TraversalExample extends IOApp.Simple {

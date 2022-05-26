@@ -1,10 +1,11 @@
-package com.example
+package com
 
 import cats.effect.IO
 
-package object io {
+package object example {
 
   implicit class DebugWrapper[A](ioa: IO[A]) {
+
     def debug: IO[A] = {
       for {
         a <- ioa
