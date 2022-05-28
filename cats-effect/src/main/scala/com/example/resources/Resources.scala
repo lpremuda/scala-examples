@@ -9,7 +9,7 @@ import java.util.Scanner
 
 import scala.concurrent.duration.DurationInt
 
-object Resources extends IOApp.Simple {
+object   Resources extends IOApp.Simple {
 
   // use-case: manage a connection lifecycle
   class Connection(url: String) {
