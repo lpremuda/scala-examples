@@ -4,6 +4,7 @@ package polymorphic.exercises
 import cats.effect.implicits.monadCancelOps_
 import cats.effect.{IO, IOApp, MonadCancel}
 import cats.implicits.toFunctorOps
+import cats.syntax.flatMap._
 
 object PolymorphicCancellationExercise extends IOApp.Simple {
 
@@ -17,24 +18,24 @@ object PolymorphicCancellationExercise extends IOApp.Simple {
     mc.pure(Thread.sleep(duration.toMillis))
 
   def inputPassword[F[_], E](implicit mc: MonadCancel[F,E]): F[String] = for {
-    _ <- mc.pure("Input password:").debug2
-    _ <- mc.pure("(typing password)").debug2
-    _ <- unsafeSleep[F, E](5.seconds)
+    _ <- mc.pure("Input password:").debug
+    _ <- mc.pure("(typing password)").debug
+    _ <- unsafeSleep[F, E](2.seconds)
     pw <- mc.pure("RockTheJVM1!")
   } yield pw
 
   def verifyPassword[F[_], E](pw: String)(implicit mc: MonadCancel[F, E]): F[Boolean] = for {
-    _ <- mc.pure("verifying...").debug2
+    _ <- mc.pure("verifying...").debug
     _ <- unsafeSleep[F,E](2.seconds)
     check <- mc.pure(pw == "RockTheJVM1!")
   } yield check
 
   def authFlow[F[_], E](implicit mc: MonadCancel[F,E]): F[Unit] = mc.uncancelable { poll =>
     for {
-      pw <- poll(inputPassword).onCancel(mc.pure("Authentication timed out. Try again later.").debug2.void) // this is cancelable
+      pw <- poll(inputPassword).onCancel(mc.pure("Authentication timed out. Try again later.").debug.void) // this is cancelable
       verified <- verifyPassword(pw) // this is NOT cancelable
-      _ <- if (verified) mc.pure("Authentication successful.").debug2 // this is NOT cancelable
-      else mc.pure("Authentication failed.").debug2
+      _ <- if (verified) mc.pure("Authentication successful.").debug // this is NOT cancelable
+      else mc.pure("Authentication failed.").debug
     } yield ()
   }
 
