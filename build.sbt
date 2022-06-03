@@ -13,6 +13,8 @@ ThisBuild / scalacOptions ++= Seq("-Xfatal-warnings")
  */
 ThisBuild / scalaVersion := "2.13.1"
 
+val versionCirce = "0.13.0"
+
 lazy val `scala-examples` = project
   .in(new File("."))
 
@@ -24,7 +26,11 @@ lazy val `general-scala` = project
     // so I reverted to cats-effect 2.1.3
     //libraryDependencies ++= Seq("org.typelevel" %% "cats-effect" % "3.3.5")
     libraryDependencies += "org.typelevel" %% "cats-effect" % "2.1.3",
-    libraryDependencies += "io.monix" %% "monix" % "3.2.2"
+    libraryDependencies += "io.monix" %% "monix" % "3.2.2",
+    libraryDependencies += "io.circe" %% "circe-core" % versionCirce,
+    libraryDependencies += "io.circe" %% "circe-generic" % versionCirce,
+    libraryDependencies += "io.circe" %% "circe-generic-extras" % versionCirce,
+    libraryDependencies += "io.circe" %% "circe-parser" % versionCirce
   )
 
 lazy val `cats-effect` = project
