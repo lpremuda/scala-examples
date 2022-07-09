@@ -1,3 +1,6 @@
+# Using Intellij on Windows created a null folder in the root directory that we don't want
+null/
+
 # Extras
 .bloop/
 .metals/
