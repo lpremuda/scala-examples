@@ -53,12 +53,7 @@ object ZigzagConversion extends App {
 
   }
 
-  def addCharToList(list: List[Char], char: Char): List[Char] = {
-    list :+ char
-  }
-
   println(convert("PAYPALISHIRING", 4))
   println(convert("PAYPALISHIRING", 3))
-
 
 }
