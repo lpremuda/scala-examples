@@ -18,6 +18,11 @@ val versionCirce = "0.13.0"
 lazy val `scala-examples` = project
   .in(new File("."))
 
+lazy val `algorithm-exercises` = project
+  .settings(
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.12" % "test"
+  )
+
 lazy val `general-scala` = project
   .settings(
     // Note: Scala with Cats uses 2.1.0
